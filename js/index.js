@@ -20,3 +20,25 @@ const request = async (url) => {
 };
 
 
+async function getPokemonList(url) {
+  const data = await request(url);
+  const results = data.results;
+  const pokemons = [];
+  for (const result of results) {
+    const data = await request(result.url);
+    const pokemon = {
+      name: data.name,
+      image: data.sprites.front_default,
+      type: data.types.map(type => type.type.name),
+      height: data.height,
+      weight: data.weight
+    };
+    pokemons.push(pokemon);
+  }
+  return {
+    pokemons: pokemons,
+    previous: data.previous,
+    next: data.next
+  };
+}
+
