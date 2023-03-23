@@ -64,3 +64,25 @@ function showPokemonInfo(pokemon) {
   `;
 }
 
+async function loadPokemonList(url) {
+  loader.style.display = 'block';
+  try {
+    const result = await getPokemonList(url);
+    showPokemonList(result.pokemons);
+    previousButton.disabled = !result.previous;
+    nextButton.disabled = !result.next;
+    previousButton.addEventListener("click", () => loadPokemonList(result.previous));
+    nextButton.addEventListener("click", () => loadPokemonList(result.next));
+  } catch (error) {
+    console.error(error);
+    loader.style.display = 'none';
+  }
+  loader.style.display = 'none';
+};
+
+loadPokemonList(url);
+
+function handleCloseClick() {
+  pokemonModal.style.display = 'none';
+}
+closeButton.addEventListener('click', handleCloseClick);
