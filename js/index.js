@@ -42,3 +42,25 @@ async function getPokemonList(url) {
   };
 }
 
+function showPokemonList(pokemons) {
+  pokemonList.innerHTML = "";
+  for (const pokemon of pokemons) {
+    const item = document.createElement("li");
+    item.classList.add("pokemon");
+    item.innerHTML = pokemon.name;
+    item.addEventListener("click", () => showPokemonInfo(pokemon));
+    pokemonList.appendChild(item);
+  }
+}
+
+function showPokemonInfo(pokemon) {
+  pokemonModal.style.display = 'flex';
+  pokemonInfo.innerHTML = `
+    <h2>${pokemon.name}</h2>
+    <img class ="pokemon-img" src="${pokemon.image}" alt="${pokemon.name} ">
+    <p>Type: ${pokemon.type.join(", ")}</p>
+    <p>Height: ${pokemon.height}</p>
+    <p>Weight: ${pokemon.weight}</p>
+  `;
+}
+
