@@ -1,13 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/loader.css">
+  <link rel="stylesheet" href="css/modal.css">
   <title>Document</title>
 </head>
+
 <body>
+  <div id="preloader">
+    <div class="loader">
+      <img src="images/pokemon.svg" alt="Loading...">
+    </div>
+  </div>
+  <div class="list-container">
+    <h1>Pokemon List</h1>
+    <ul id="pokemonList"></ul>
+  </div>
+
+  <div id="pokemon-modal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times</span>
+      <div id="pokemon-info"></div>
+    </div>
+  </div>
+  <div class="pagination">
+    <button id="previous">Back</button>
+    <button id="next">Next</button>
+  </div>
+
   <script src="js/index.js"></script>
 </body>
+
 </html>
