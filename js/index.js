@@ -8,6 +8,11 @@ const loader = document.querySelector('#preloader')
 
 pokemonModal.style.display = 'none';
 
+let links = {
+  previous,
+  next
+};
+
 let url = "https://pokeapi.co/api/v2/pokemon/";
 
 const request = async (url) => {
@@ -71,8 +76,8 @@ async function loadPokemonList(url) {
     showPokemonList(result.pokemons);
     previousButton.disabled = !result.previous;
     nextButton.disabled = !result.next;
-    previousButton.addEventListener("click", () => loadPokemonList(result.previous));
-    nextButton.addEventListener("click", () => loadPokemonList(result.next));
+    links.previous = result.previous;
+    links.next = result.next
   } catch (error) {
     console.error(error);
     loader.style.display = 'none';
@@ -81,7 +86,8 @@ async function loadPokemonList(url) {
 };
 
 loadPokemonList(url);
-
+previousButton.addEventListener("click", () => loadPokemonList(links.previous));
+nextButton.addEventListener("click", () => loadPokemonList(links.next));
 function handleCloseClick() {
   pokemonModal.style.display = 'none';
 }
